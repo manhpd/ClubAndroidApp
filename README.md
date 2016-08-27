@@ -5,7 +5,7 @@
         - Booking Management for a particular facility and corresponding member with a specific date and time.
 
 ### Pre-requiste for running this app
-    - #### Download Android Studio
+    - ##### Download Android Studio
         - Install Android studio from its [download](https://developer.android.com/studio/index.html) page.
         - This app can be run using either android phone or the default emulator provided by android studio.
     - #### Open this app in Android Studio
