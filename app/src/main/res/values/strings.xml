@@ -16,4 +16,8 @@
   <string name="save_successful">Saved successfully!</string>
   <string name="generic_error">Sorry something went wrong! We\'re looking into it!</string>
   <string name="empty_value">Add new ones to appear here!!</string>
+  <string name="date_select">Date</string>
+  <string name="strt_time_select">Start Time</string>
+  <string name="end_time_select">End Time</string>
+  <string name="title_activity_add_booking">Add Booking</string>
 </resources>

@@ -16,11 +16,11 @@ import sg.edu.nus.clubmanagement.application.App;
 /**
  * Created by Swarna on 8/6/2016.
  */
-public class ListAdapter extends ArrayAdapter<Member> {
+public class MemberListAdapter extends ArrayAdapter<Member> {
   private Context context;
   private List<Member> members = new ArrayList<>();
 
-  public ListAdapter(Context context) {
+  public MemberListAdapter(Context context) {
     super(context, R.layout.mem_fac_row_layout);
     this.context = context;
     refreshMembers();

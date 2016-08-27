@@ -11,10 +11,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import sg.edu.nus.clubmanagement.R;
 import sg.edu.nus.clubmanagement.activity.AddMemberActivity;
-import sg.edu.nus.clubmanagement.adapter.ListAdapter;
+import sg.edu.nus.clubmanagement.adapter.MemberListAdapter;
 
 public class MemberFragment extends Fragment {
-  private ListAdapter listAdapter;
+  private MemberListAdapter memberListAdapter;
   private TextView tvEmpty;
 
   @Override public void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,8 @@ public class MemberFragment extends Fragment {
     View fragmentView = inflater.inflate(R.layout.fragment_member, container, false);
     ListView memberList = (ListView) fragmentView.findViewById(R.id.lv_member_list);
     tvEmpty = (TextView) fragmentView.findViewById(R.id.tv_empty_value);
-    listAdapter = new ListAdapter(getActivity());
-    memberList.setAdapter(listAdapter);
+    memberListAdapter = new MemberListAdapter(getActivity());
+    memberList.setAdapter(memberListAdapter);
     FloatingActionButton floatingActionButton =
         (FloatingActionButton) fragmentView.findViewById(R.id.fab);
     floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +41,7 @@ public class MemberFragment extends Fragment {
 
   @Override public void onResume() {
     super.onResume();
-    listAdapter.refreshMembers();
-    tvEmpty.setVisibility(listAdapter.getCount() == 0 ? View.VISIBLE : View.GONE);
+    memberListAdapter.refreshMembers();
+    tvEmpty.setVisibility(memberListAdapter.getCount() == 0 ? View.VISIBLE : View.GONE);
   }
 }
