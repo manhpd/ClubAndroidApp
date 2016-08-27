@@ -1,4 +1,35 @@
+## Club Management Workshop in Android
+This android app provides the following set of functions for the club.
+- Member Management.
+- Facility Management.
+- Booking Management for a particular facility and corresponding member with a specific date and time.
 
-[›1©ÚéžžÕ¨®K!¢˜§wk¢'S†+Úè‰Ö©¦šè¾'^²Ø^~‰e£§‚Ç­¡÷îËb¢{¢»ayÉnlÇ¦mêÌjv zg§´VœŠX­ÈÆ§j¦z{A¢‰"ž¨™éí~ŠÚ¥ªí‰Ë¥j·Úr)b·&§uÊ+­ë)¢wbž	ž™·«Â+ajÊ^r'âqÖ­y©Ý¶)ž>·«z«¢²×Ÿ¢ºîžx§‚Øb±ªiŒ'–†wk¢'R¶çb ‰ìµ©ewk¢'l¶çb¡úèš+lvŒ'–††Ûi³ÿÝz÷¥¢—«jwk¢'\¢oì¶çb£ø§uìa¶iij“†+¦—·«º{¬ŠxŠØ^­©Ý®ˆ¦'zŠí…ç^}«¥µé®•«h®šè¾'^u¼šÚè‰Û-¹Ø¨:—§¶¬jšbœ	Ý®ˆJÛŠ€¥¢w¿Œ'–†¶¬­êh²+h¯#©zp'vº"vËnv*–'$¢s©zv§{¬¶)àwk¢'R¶çb úèç-Ié^rÛayú%uêð†'!Ê‹¯yÉhçvŒ'–†yÔáŠÊ)z{-…æ©¦)ò¢êÚÚè‰Û-¹Ø¨
-‰ßŠ«x	Ý®ˆJÛŠ‹šéZ¶ŠÍjø j×­¡:(–À'vº"tC1©ÚêÂ–'$¢{ax*Þj×•Š»njPÞ¾'nëm¢{hr·šµæ§zk¥jÚ+Ié^rÓá¢wŸ®‰­…àšµè(¯&§vÆ¦¦W©†‰Þ~º&¶¥ŠËfz{Ÿ¢· 5ìn³€¥‰É{HžØ^Eç(šg§uçmi·!¢‹1ªì†f¥–Œó®¸~Šúá¸­³+-zj+1ªì†f¥–Œó§è¯}›ŠÛ2²×¦
-Xœ×±´X¥–)Ú©ž~Šò¢êÝzøœy©Ý•æ¯zØ^uçÚº[ljË.r¥‰É(œojwu'­¶)à±·¥£azv¥–‡µéžšŠò¢´@1SyªHž×«©R¶ŠÚæ§u Âj·Rº²×D6Læ©ÛžŒŠù×c"{^®v¥JÚ+j¶ƒ	ªÝÔ`B–'$¢qbž+!6Œ2¢ëÞ²çzÇî–\œ¢wâ‚êÞw*.­×¯zZ)™éíz{â®‰æz{_¢ºîžx§‚Ø^jšQºyâžaŠÆ©¤)brJ'FéÑºv©¥©Ý±é^rÜ¨º·¦ºV­¢¼!‰Èr¢ëÞjZÞiÜœ¢wâ‚êÞuf¢µú+kb•çè­º(¶)à¦ºzË-…éò¢êÚ¦œ"–[-j»kºyâž§¶žšéZ¶ŠÄž:2•æ«ž)àjw]z÷¥¢˜§©Ý®ˆjšl
+### Pre-requiste for running this app
+##### Download Android Studio
+- Install Android studio from its [download](https://developer.android.com/studio/index.html) page.
+- This app can be run using either android phone or the default emulator provided by android studio.
+    
+##### Open this app in Android Studio
+- Clone/Download this repository
+- Open Android studio -> click on "Open an existing Android Studio Project"
+- Select the folder which you've cloned/downloaded.
+- This opens the app in your android studio.
+    
+##### Configure Android Studio's Emulator
+- Navigate to Tools -> Android -> AVD Manager.
+- Click on the Create Virtual Device button to create an emulator.
+- Select "Phone" from the Category and sample phone from the list menu (for eg- Nexus 4).
+- Click Next -> In the Recommended tab choose Marshmallow (X86_64) for 64 bit system or Marshmallow (X86) for 32 bit system.
+- Click Next -> Fill in a name for your device and leave the defaults as such.
+- Click on Advanced Settings below then allocate memory or RAM, VMHeap, Internal Storage and SD Card.
+- Suggested RAM - 2GB, VM Heap - 256MB or 512MB, Internal Storage - 2GB, SD Card - 1GB.
+- Click on Finish.
+    
+Now you've succesfully configured your development environment for running the app.
+    
+##### Running this app.
+- Click on "Run -> Run app" and select your emulator which you've already configured.
+- Wait for a while for booting process then your app will start running in the emulator
+        
+
+#### Enjoy learning and developing android apps!
