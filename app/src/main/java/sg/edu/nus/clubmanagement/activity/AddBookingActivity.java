@@ -4,29 +4,38 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
+import sg.edu.nus.clubmanagement.ClubFolder.Facility;
+import sg.edu.nus.clubmanagement.ClubFolder.Member;
 import sg.edu.nus.clubmanagement.R;
+import sg.edu.nus.clubmanagement.application.App;
 
 public class AddBookingActivity extends AppCompatActivity {
 
   private Spinner spnMember, spnFacility;
   private EditText etDate, etStrtTime, etEndTime;
   private Button btnSave;
+  private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+  private SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+  Calendar currentCal = Calendar.getInstance();
+  Calendar selectedDate = Calendar.getInstance();
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_add_booking);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
 
     spnMember = (Spinner) findViewById(R.id.spn_member);
     spnFacility = (Spinner) findViewById(R.id.spn_facility);
@@ -35,9 +44,27 @@ public class AddBookingActivity extends AppCompatActivity {
     etEndTime = (EditText) findViewById(R.id.et_select_end_time);
     btnSave = (Button) findViewById(R.id.btn_save);
 
-    Calendar dateCalendar = Calendar.getInstance();
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-    etDate.setText(dateFormatter.format(dateCalendar.getTime()));
+    List<Member> memberList = App.club.getMembers();
+    List<String> spnMemList = new ArrayList<>();
+    spnMemList.add("<Select Member>");
+    for (Member member : memberList) {
+      spnMemList.add(member.toString());
+    }
+    ArrayAdapter<String> spnMemAdapter =
+        new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spnMemList);
+    spnMember.setAdapter(spnMemAdapter);
+
+    List<Facility> facilityList = App.club.getFacilities();
+    List<String> spnFacList = new ArrayList<>();
+    spnFacList.add("<Select Facility>");
+    for (Facility facility : facilityList) {
+      spnFacList.add(facility.toString());
+    }
+    ArrayAdapter<String> spnFacAdapter =
+        new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spnFacList);
+    spnFacility.setAdapter(spnFacAdapter);
+
+    etDate.setText(dateFormatter.format(selectedDate.getTime()));
     etDate.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         DatePickerDialog.OnDateSetListener onDateSetListener =
@@ -46,49 +73,104 @@ public class AddBookingActivity extends AppCompatActivity {
               public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, monthOfYear, dayOfMonth);
-                SimpleDateFormat simpleDateFormat =
-                    new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-                etDate.setText(simpleDateFormat.format(calendar.getTime()));
+                selectedDate = calendar;
+                etDate.setText(dateFormatter.format(calendar.getTime()));
               }
             };
         DatePickerDialog datePickerDialog =
             new DatePickerDialog(AddBookingActivity.this, onDateSetListener,
-                Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                currentCal.get(Calendar.YEAR), currentCal.get(Calendar.MONTH),
+                currentCal.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
       }
     });
 
+    etStrtTime.setText(timeFormatter.format(currentCal.getTime()));
     Calendar timeCalendar = Calendar.getInstance();
-    SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm a", Locale.getDefault());
-    etStrtTime.setText(timeFormatter.format(timeCalendar.getTime()));
+    timeCalendar.setTime(currentCal.getTime());
+    timeCalendar.set(Calendar.HOUR, currentCal.get(Calendar.HOUR));
+    timeCalendar.set(Calendar.MINUTE, currentCal.get(Calendar.MINUTE));
+    timeCalendar.set(Calendar.AM_PM, currentCal.get(Calendar.AM_PM));
     timeCalendar.add(Calendar.HOUR, 1);
     etEndTime.setText(timeFormatter.format(timeCalendar.getTime()));
 
     View.OnClickListener timeClickListener = new View.OnClickListener() {
       @Override public void onClick(final View v) {
+        final EditText editText = (EditText) v;
         TimePickerDialog.OnTimeSetListener timeSetListener =
             new TimePickerDialog.OnTimeSetListener() {
               @Override public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                SimpleDateFormat timeFormatter =
-                    new SimpleDateFormat("hh:mm a", Locale.getDefault());
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH), hourOfDay, minute);
-                EditText editText = (EditText) v;
                 editText.setText(timeFormatter.format(calendar.getTime()));
               }
             };
+        Calendar timeCalendar = Calendar.getInstance();
+        try {
+          timeCalendar.setTime(timeFormatter.parse(editText.getText().toString()));
+        } catch (ParseException e) {
+          Toast.makeText(AddBookingActivity.this, R.string.generic_error, Toast.LENGTH_SHORT)
+              .show();
+        }
         TimePickerDialog timePickerDialog =
             new TimePickerDialog(AddBookingActivity.this, timeSetListener,
-                Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
-                Calendar.getInstance().get(Calendar.MINUTE), false);
+                timeCalendar.get(Calendar.HOUR_OF_DAY), timeCalendar.get(Calendar.MINUTE), false);
         timePickerDialog.show();
       }
     };
 
     etStrtTime.setOnClickListener(timeClickListener);
     etEndTime.setOnClickListener(timeClickListener);
+
+    btnSave.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        if (isValid()) {
+          Toast.makeText(AddBookingActivity.this, "Proceed booking!", Toast.LENGTH_SHORT).show();
+        }
+      }
+    });
+  }
+
+  private boolean isValid() {
+    boolean isValid = true;
+    if (spnMember.getSelectedItemPosition() == 0) {
+      Toast.makeText(this, R.string.mem_select_validation_msg, Toast.LENGTH_SHORT).show();
+      isValid = false;
+    } else if (spnFacility.getSelectedItemPosition() == 0) {
+      Toast.makeText(this, R.string.fac_select_validation_msg, Toast.LENGTH_SHORT).show();
+      isValid = false;
+    }
+
+    try {
+      Calendar selectedStTime = Calendar.getInstance();
+      selectedStTime.setTime(timeFormatter.parse(etStrtTime.getText().toString()));
+      Calendar convertedStTime = Calendar.getInstance();
+      convertedStTime.set(Calendar.HOUR, selectedStTime.get(Calendar.HOUR));
+      convertedStTime.set(Calendar.MINUTE, selectedStTime.get(Calendar.MINUTE));
+      convertedStTime.set(Calendar.AM_PM, selectedStTime.get(Calendar.AM_PM));
+
+      Calendar selectedEtTime = Calendar.getInstance();
+      selectedEtTime.setTime(timeFormatter.parse(etEndTime.getText().toString()));
+      Calendar convertedEtTime = Calendar.getInstance();
+      convertedEtTime.set(Calendar.HOUR, selectedEtTime.get(Calendar.HOUR));
+      convertedEtTime.set(Calendar.MINUTE, selectedEtTime.get(Calendar.MINUTE));
+      convertedEtTime.set(Calendar.AM_PM, selectedEtTime.get(Calendar.AM_PM));
+
+      if (currentCal.getTime().compareTo(selectedDate.getTime()) > 0) {
+        Toast.makeText(this, R.string.date_validation_msg, Toast.LENGTH_SHORT).show();
+        isValid = false;
+      } else if (currentCal.compareTo(convertedStTime) > 0) {
+        Toast.makeText(this, R.string.time_validation_msg, Toast.LENGTH_SHORT).show();
+        isValid = false;
+      } else if (convertedStTime.compareTo(convertedEtTime) >= 0) {
+        Toast.makeText(this, R.string.st_time_et_time_validation_msg, Toast.LENGTH_SHORT).show();
+        isValid = false;
+      }
+    } catch (ParseException e) {
+      Toast.makeText(this, R.string.generic_error, Toast.LENGTH_SHORT).show();
+    }
+
+    return isValid;
   }
 }

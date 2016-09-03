@@ -41,9 +41,7 @@ public class MemberListAdapter extends ArrayAdapter<Member> {
     }
 
     final Member member = members.get(position);
-    viewHolder.tvName.setText(
-        String.format("%s %s %s", member.getFirstName(), member.getSecondName(),
-            member.getSurname()));
+    viewHolder.tvName.setText(member.toString());
     viewHolder.btnRemove.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         App.club.removeMember(member.getMemberNumber());

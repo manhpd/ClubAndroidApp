@@ -31,6 +31,7 @@ public class ClubStore {
    */
   public void loadClub(Context context) {
     loadMembers(context);
+    loadFacilities(context);
   }
 
   /**
@@ -56,6 +57,21 @@ public class ClubStore {
         club.addMember(strList[2], strList[0], strList[1]);
       }
     }
+  }
+
+  /**
+   * Load members from file
+   *
+   * @param context: Application context
+   */
+  private void loadFacilities(Context context) {
+    Facility fac1 = new Facility("Main Hall", null);
+    Facility fac2 = new Facility("Room1", "Conference Room on Level 2");
+    Facility fac3 = new Facility("Room2", "Meeting Room on Level 3");
+
+    club.addFacility(fac1.getName(), fac1.getDescription());
+    club.addFacility(fac2.getName(), fac2.getDescription());
+    club.addFacility(fac3.getName(), fac3.getDescription());
   }
 
   /**
