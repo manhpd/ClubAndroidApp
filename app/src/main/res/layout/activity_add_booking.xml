@@ -15,59 +15,127 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-      <Spinner
-          android:id="@+id/spn_member"
+      <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_margin="20dp"
+          android:text="@string/txt_member"
+          android:layout_marginLeft="22dp"
+          android:layout_marginStart="22dp"
+          android:layout_marginTop="20dp"
+          android:id="@+id/tv_member"
+          android:textStyle="bold"
+          />
+      <Spinner
+          android:id="@+id/spn_member"
+          android:layout_below="@id/tv_member"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="20dp"
+          android:layout_marginLeft="20dp"
+          android:layout_marginRight="20dp"
+          android:layout_marginEnd="20dp"
+          android:layout_marginTop="10dp"
           >
       </Spinner>
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/txt_facility"
+          android:layout_below="@id/spn_member"
+          android:layout_marginLeft="22dp"
+          android:layout_marginStart="22dp"
+          android:layout_marginTop="20dp"
+          android:id="@+id/tv_facility"
+          android:textStyle="bold"
+          />
       <Spinner
           android:id="@+id/spn_facility"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_margin="20dp"
-          android:layout_below="@id/spn_member"
+          android:layout_marginStart="20dp"
+          android:layout_marginLeft="20dp"
+          android:layout_marginRight="20dp"
+          android:layout_marginEnd="20dp"
+          android:layout_marginTop="10dp"
+          android:layout_below="@id/tv_facility"
           >
       </Spinner>
 
-      <EditText
-          android:id="@+id/et_select_date"
-          android:layout_width="wrap_content"
+      <RelativeLayout
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:hint="@string/date_select"
           android:layout_below="@id/spn_facility"
-          android:layout_margin="20dp"
-          android:inputType="date"
-          android:textSize="20sp"
-          android:focusable="false"
-          />
-      <EditText
-          android:id="@+id/et_select_strt_time"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:hint="@string/strt_time_select"
-          android:layout_toRightOf="@id/et_select_date"
-          android:layout_toEndOf="@id/et_select_date"
-          android:layout_margin="10dp"
-          android:focusable="false"
-          android:textSize="20sp"
-          android:inputType="datetime"
-          android:layout_alignBaseline="@id/et_select_date"
-          />
-      <EditText
-          android:id="@+id/et_select_end_time"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:focusable="false"
-          android:hint="@string/end_time_select"
-          android:layout_toEndOf="@id/et_select_strt_time"
-          android:layout_toRightOf="@id/et_select_strt_time"
-          android:layout_margin="10dp"
-          android:layout_alignBaseline="@id/et_select_date"
-          android:inputType="datetime"
-          android:textSize="20sp"
-          />
+          >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_date"
+            android:text="@string/date_select"
+            android:textStyle="bold"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            />
+        <EditText
+            android:id="@+id/et_select_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/date_select"
+            android:layout_below="@id/tv_date"
+            android:layout_alignLeft="@id/tv_date"
+            android:layout_alignStart="@id/tv_date"
+            android:inputType="date"
+            android:focusable="false"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_stTime"
+            android:text="@string/strt_time_select"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBaseline="@id/tv_date"
+            />
+        <EditText
+            android:id="@+id/et_select_strt_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/strt_time_select"
+            android:layout_toRightOf="@id/et_select_date"
+            android:layout_toEndOf="@id/et_select_date"
+            android:layout_alignStart="@id/tv_stTime"
+            android:layout_alignLeft="@id/tv_stTime"
+            android:focusable="false"
+            android:inputType="datetime"
+            android:layout_alignBaseline="@id/et_select_date"
+            />
+        <EditText
+            android:id="@+id/et_select_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:hint="@string/end_time_select"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBaseline="@id/et_select_date"
+            android:inputType="datetime"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_etTime"
+            android:text="@string/end_time_select"
+            android:layout_alignBaseline="@id/tv_stTime"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_alignLeft="@id/et_select_end_time"
+            android:layout_alignStart="@id/et_select_end_time"
+            />
+      </RelativeLayout>
     </RelativeLayout>
   </ScrollView>
   <Button
