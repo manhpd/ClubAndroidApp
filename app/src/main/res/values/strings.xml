@@ -9,9 +9,15 @@
   <string name="first_name">First Name</string>
   <string name="sur_name">Surname</string>
   <string name="second_name">Second Name</string>
+
+  <string name="facility_name">Facility Name</string>
+  <string name="facility_description">Facility Description</string>
+
+
   <string name="save">Save</string>
   <string name="first_name_validation_msg">Please fill in first name</string>
   <string name="second_name_validation_msg">Please fill in second name</string>
+  <string name="facility_name_validation_msg">Please fill in Facility Name</string>
   <string name="sur_name_validation_msg">Please fill in surname</string>
   <string name="mem_select_validation_msg">Please select a member</string>
   <string name="fac_select_validation_msg">Please select a facility</string>
@@ -27,4 +33,5 @@
   <string name="st_time_et_time_validation_msg">Start time should be greater than End time</string>
   <string name="date_validation_msg">Please select a valid date for booking</string>
   <string name="time_validation_msg">Please select a valid time for booking</string>
+  <string name="title_activity_add_facility">AddFacilityActivity</string>
 </resources>

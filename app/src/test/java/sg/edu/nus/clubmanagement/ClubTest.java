@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import sg.edu.nus.clubmanagement.ClubFolder.Club;
 import sg.edu.nus.clubmanagement.ClubFolder.Member;
+import sg.edu.nus.clubmanagement.ClubFolder.Booking;
 
 public class ClubTest extends TestCase {
 

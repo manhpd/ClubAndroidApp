@@ -17,7 +17,7 @@ public class AddMemberActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_add_member);
 
-    etFirstName = (EditText) findViewById(R.id.et_first_name);
+    etFirstName = (EditText) findViewById(R.id.et_facility_name);
     etSecondName = (EditText) findViewById(R.id.et_second_name);
     etSurname = (EditText) findViewById(R.id.et_sur_name);
 

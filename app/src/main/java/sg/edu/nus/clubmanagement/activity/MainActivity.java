@@ -13,15 +13,19 @@ public class MainActivity extends AppCompatActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+
     final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
     PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), 3);
     viewPager.setAdapter(pagerAdapter);
+
     final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
     tabLayout.addTab(tabLayout.newTab().setText("Members"));
     tabLayout.addTab(tabLayout.newTab().setText("Facilities"));
     tabLayout.addTab(tabLayout.newTab().setText("Bookings"));
+
     tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
       @Override public void onTabSelected(TabLayout.Tab tab) {
         viewPager.setCurrentItem(tab.getPosition());
